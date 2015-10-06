@@ -1,54 +1,18 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-<div class="row">
-  <div class="col-md-6">
-
-    <div class="form-group required">
-      <%= f.label :first_name %><br />
-      <%= f.text_field(:first_name, class: "form-control", placeholder: "first name", autocomplete: true, autofocus: true) %>
-    </div>
-
-    <div class="form-group required">
-      <%= f.label :last_name %><br />
-      <%= f.text_field(:last_name, class: "form-control", placeholder: "last name", autocomplete: true) %>
-    </div>
-
-    <div class="form-group required">
-      <%= f.label :email %><br />
-      <%= f.email_field(:email, class: "form-control", placeholder: "email", autocomplete: true) %>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div class="form-group">
-      <%= f.label :phone_num %><br />
-      <%= f.number_field(:phone_num, class: "form-control", placeholder: "phone number", autocomplete: "off") %>
+<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, label_errors: true) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.text_field(:first_name, placeholder: "first name", autocomplete: true, autofocus: true) %>
+      <%= f.text_field(:last_name, placeholder: "last name", autocomplete: true) %>
+      <%= f.email_field :email, placeholder: "email" %>
+      <%= f.password_field(:current_password, placeholder: "current_password",autocomplete: "off") %>
+      <%= f.password_field :password , placeholder: "password", help: "leave blank if you don't want to change it"%>
+      <%= f.password_field :password_confirmation, label: "Confirm Password", placeholder: "confirm password", help: "leave blank if you don't want to change it" %>
+      <%= f.number_field(:phone_num, placeholder: "phone number", autocomplete: "off") %>
+      <%= f.submit "Update" %>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="form-group required">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field(:current_password, class: "form-control", placeholder: "current_password",autocomplete: "off") %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field(:password, class: "form-control", placeholder: "password", autocomplete: "off") %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field(:password_confirmation, class: "form-control", placeholder: "password_confirmation", autocomplete: "off") %>
-    </div>
-    <div class="actions">
-      <%= f.submit "Update", class: "btn btn-success" %> 
-      <input type="button" value="Cancel" onClick="history.go(-1);return true;", class="btn btn-primary">
-    </div> 
-</div>
 <% end %>
 
 
